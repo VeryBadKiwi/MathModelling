@@ -39,20 +39,48 @@ Time Time::operator-(Time& minusTime)
 	Time resultMinus;
 	resultMinus.hours=this->hours-minusTime.hours;
 	resultMinus.minutes=this->minutes-minusTime.minutes;
+	if (resultMinus.minutes <= 0){
+		resultMinus.hours--;
+		resultMinus.minutes += maxMinute;
+	}
 	return resultMinus;
 }
 
 Time Time::operator*(int mulTimes)
 {
 	Time resultMul;
+	char resMin;
 	resultMul.hours=this->hours*mulTimes;
 	resultMul.minutes=this->minutes*mulTimes;
-	return resultMul;
+	resMin = resultMul.minutes / maxMinute;
+	resultMul.hours +=(int)resMin;
 	while(resultMul.minutes >= maxMinute)
-	{
 		resultMul.minutes -= maxMinute;
-		resultMul.hours++;
-	}
+	return resultMul;
+}
+
+bool Time::operator>(Time& biggerTime)
+{
+	if ((this->hours > biggerTime.hours)||(this->minutes > biggerTime.minutes))
+		return true;
+	else
+		return false;
+}
+
+bool Time::operator<(Time& lessTime)
+{
+	if ((this->hours < lessTime.hours)||(this->minutes < lessTime.minutes))
+		return true;
+	else
+		return false;
+}
+
+bool Time::operator==(Time& equalTime)
+{
+		if ((this->hours == equalTime.hours)||(this->minutes == equalTime.minutes))
+		return true;
+	else
+		return false;
 }
 
 void Time::print()
