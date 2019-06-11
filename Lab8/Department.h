@@ -3,16 +3,18 @@ class Department;
 #include <string>
 #include "Employee.h"
 
+using namespace std;
+
 class Department
 {
 private:
-	std::string name;
-	Employee * head;
+	string name;
+	Employee* head;
 public:
-	void setName(std::string newName);
-	std::string getName();
+	void setName(string newName);
+	string getName();
 	void setHead(Employee* newHead);
-	Employee * getHead();
+	Employee* getHead();
 	void print();
 };
 

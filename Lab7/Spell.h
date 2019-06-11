@@ -1,9 +1,13 @@
 #pragma once
 #include <string>
-class Spell
+
+using namespace std;
+
+class spell
 {
 public:
-	std::string name;
+	string name;
 	int dhp;
 	int dmp;
 };
+

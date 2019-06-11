@@ -4,19 +4,21 @@ class Employee;
 #include "idCard.h"
 #include "Department.h"
 
+using namespace std;
+
 class Employee
 {
 private:
-	std::string name;
-	std::string position;
+	string name;
+	string position;
 	idCard* card;
 	int room;
 	Department* department;
 public:
-	void setName(std::string newName);
-	std::string getName();
-	void setPosition(std::string newPosition);
-	std::string getPositon();
+	void setName(string newName);
+	string getName();
+	void setPosition(string newPosition);
+	string getPositon();
 	void setIdCard(idCard* newIdCard);
 	idCard* getIdCard();
 	void setRoom(int newRoom);

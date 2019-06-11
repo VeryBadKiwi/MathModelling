@@ -1,97 +1,96 @@
-﻿// Lab7.cpp : Defines the entry point for the console application.
+﻿// Lab7.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
-#include "stdafx.h"
 #include <iostream>
-#include "Mage.h"
-#include "Spell.h"
+#include <string>
+#include "mage.h"
+#include "spell.h"
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
-void Mage::init(int newhp, int newmp, std::string newname)
+void mage::init(int newhp, int newmp, string newname)
 {
 	hp = newhp;
 	mp = newmp;
 	name = newname;
 }
 
-string Mage::getname()
+string mage::getname()
 {
 	return this->name;
 }
 
-void Mage::say(std::string text)
+void mage::say(string text)
 {
-	cout<<this->name<<" says "<<text<<endl<<endl;
+	setlocale(LC_ALL, "Russian");
+	cout << this->name << " говорит " << text << endl;
 }
 
-int Mage::cast(Spell& spl, Mage& target)
+int mage::cast(spell& spl, mage& target)
 {
 	if (hp > 0)
 	{
-		cout<<this->name<<" hit with "<<spl.name<<" our enemy "<<target.getname()<<endl<<endl;
+		cout << this->name << " ударил своим " << spl.name << " своего врага " << target.getname() <<  endl;
 		target.hit(spl);
-	}
-	else
-	{
-		this->say("I'm dead");
 	}
 	return 0;
 }
 
-void Mage::hit(Spell& spl)
+void mage::hit(spell& spl)
 {
-	this->hp-=spl.dhp;
-	this->mp-=spl.dmp;
-	if (hp<=0)
+	this->hp -= spl.dhp;
+	this->mp -= spl.dmp;
+	if (hp <= 0)
 	{
-		this->say(" i am loser");
+		this->say("Я умер...");
+	}
+	else
+	{
+		cout << this->name << " говорит: У меня осталось " << hp << " здоровья и " << mp << " маны." << endl;
 	}
 }
 
-
 int main()
 {
-	Mage Ivan;
-	Mage Boris;
-	Spell bolt;
-	Spell drain;
+	setlocale(LC_ALL, "Russian");
 
-	bolt.name="Bolt";
-	bolt.dhp=25;
-	bolt.dmp=0;
+	srand(time(NULL));
 
-	drain.name="Drain";
-	drain.dhp=15;
-	drain.dmp=30;
+	mage vanya;
+	mage boris;
+	spell bolt;
+	spell drain;
 
-	Ivan.init(100,100,"Ivan");
-	Ivan.say("Yo");
+	bolt.name = "Арбалет";
+	bolt.dhp = rand() % 25 + 10;
+	bolt.dmp = 0;
 
-	Boris.init(100,100,"Boris");
-	Boris.say("Hello!");
+	drain.name = "Истощение";
+	drain.dhp = rand() % 10;
+	drain.dmp = rand() % 25 + 10;
 
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
+	vanya.init(100, 50, "Ваня");
+	vanya.say("Это будет славная битва!");
 
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
+	boris.init(75, 100, "Борис");
+	boris.say("Победителем выйдет только один из нас!");
 
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
-
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
-
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
-
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
-
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
-
-	Ivan.cast(bolt,Boris);
-	Boris.cast(drain,Ivan);
+	for (int i = 0; i < 8; i++)
+	{
+		boris.cast(drain, vanya);
+		vanya.cast(bolt, boris);
+	}
 }
+
+// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
+// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+
+// Советы по началу работы 
+//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
+//   2. В окне Team Explorer можно подключиться к системе управления версиями.
+//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
+//   4. В окне "Список ошибок" можно просматривать ошибки.
+//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
+//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

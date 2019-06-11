@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void Department::setName(std::string newName)
+void Department::setName(string newName)
 {
 	name=newName;
 }
@@ -29,7 +29,7 @@ void Department::print()
 
 }
 
-void Employee::setName(std::string newName)
+void Employee::setName(string newName)
 {
 	name=newName;
 }
@@ -39,7 +39,7 @@ string Employee::getName()
 	return this->name;
 }
 
-void Employee::setPosition(std::string newPosition)
+void Employee::setPosition(string newPosition)
 {
 	position = newPosition;
 }
@@ -81,11 +81,13 @@ Department* Employee::getDepartment()
 
 void Employee::print()
 {
-	cout << "Name: " << name << endl;
-	cout << "Position: " << position << endl;
-	cout << "Room: " << room << endl;
-	cout << "IdCard: " << this->card->getNumber() << endl;
-	cout << "Department: " << this->department->getName() << endl;
+	setlocale(LC_ALL, "Russian");
+
+	cout << "#: " << position << endl;
+	cout << "Имя: " << name << endl;
+	cout << "Комната: " << room << endl;
+	cout << "Карта: " << this->card->getNumber() << endl;
+	cout << "Отдел: " << this->department->getName() << endl;
 }
 
 void idCard::setNumber(int newNumber)
@@ -116,69 +118,69 @@ void idCard::print()
 
 void main()
 {
-	Department dptAdm;
-	Department dptDev;
+	setlocale(LC_ALL, "Russian");
+	Department depAdm;
+	Department depBuh;
+	Department depKadr;
 
-	Employee headDep, mainDev, dev, director, subDirector, mainAccountant;
-	idCard headDep101, mainDev5016, devId5018, director201, subDirector201, mainAccountant202;
+	Employee glavBuh, Buh, director, mainAccountant, accountant;
+	idCard glavBuh4124, Buh62, director2321, mainAccountant224, accountant2345;
 
-	dptDev.setName("Developers");
-	dptAdm.setName("Administration");
+	depAdm.setName("Администрация");
+	depBuh.setName("Бухгалтерия");
+	depKadr.setName("Отдел кадров");
 
-	headDep101.setNumber(101);
-	mainDev5016.setNumber(5016);
-	devId5018.setNumber(5018);
-	director201.setNumber(201);
-	subDirector201.setNumber(5022);
-	mainAccountant202.setNumber(5019);
+	glavBuh4124.setNumber(4124);
+	Buh62.setNumber(62);
+	director2321.setNumber(2321);
+	mainAccountant224.setNumber(224);
+	accountant2345.setNumber(2345);
 
-	headDep.setName("Ivan Ivanovich Ivanov");;
-	headDep.setPosition("1");
-	headDep.setRoom(101);
-	headDep.setIdCard(&headDep101);
-	headDep.setDepartment(&dptDev);
-	dptDev.setHead(&headDep);
+	glavBuh.setPosition("1");
+	glavBuh.setName("Иван Иванович Иванов");
+	glavBuh.setRoom(313);
+	glavBuh.setIdCard(&glavBuh4124);
+	glavBuh.setDepartment(&depBuh);
+	depBuh.setHead(&glavBuh);
 
-	mainDev.setName("Sergeev Sergei Sergeevich");;
-	mainDev.setPosition("2");
-	mainDev.setRoom(102);
-	mainDev.setIdCard(&mainDev5016);
-	mainDev.setDepartment(&dptDev);
-	dptDev.setHead(&mainDev);
+	Buh.setPosition("2");
+	Buh.setName("Алексеев Алексей Алексеевич");
+	Buh.setRoom(21);
+	Buh.setIdCard(&Buh62);
+	Buh.setDepartment(&depBuh);
+	depBuh.setHead(&Buh);
 
-	dev.setName("Sidorov Sidor Sidorovich");
-	dev.setPosition("3");
-	dev.setRoom(102);
-	dev.setIdCard(&devId5018);
-	dev.setDepartment(&dptDev);
-	dptDev.setHead(&dev);
+	Buh.setPosition("3");
+	Buh.setName("Михайлов Михаил Михайлович");
+	Buh.setRoom(613);
+	Buh.setIdCard(&Buh62);
+	Buh.setDepartment(&depBuh);
+	depBuh.setHead(&Buh);
 
-	director.setName("Mikhailov Mikhail Mikhailovich");
 	director.setPosition("4");
-	director.setRoom(201);
-	director.setIdCard(&director201);
-	director.setDepartment(&dptAdm);
-	dptAdm.setHead(&director);
+	director.setName("Александрова Александра Александровна");
+	director.setRoom(423);
+	director.setIdCard(&director2321);
+	director.setDepartment(&depAdm);
+	depAdm.setHead(&director);
 
-	subDirector.setName("Alexandrovna Alexandra Alexandrovna");
-	subDirector.setPosition("5");
-	subDirector.setRoom(201);
-	subDirector.setIdCard(&subDirector201);
-	subDirector.setDepartment(&dptAdm);
-	dptAdm.setHead(&subDirector);
+	mainAccountant.setPosition("5");
+	mainAccountant.setName("Дмитриев Дмитрий Дмитриевич");
+	mainAccountant.setRoom(756);
+	mainAccountant.setIdCard(&accountant2345);
+	mainAccountant.setDepartment(&depKadr);
+	depKadr.setHead(&mainAccountant);
 
-	mainAccountant.setName("Evgenevna Evgenia Evgeneva");
-	mainAccountant.setPosition("6");
-	mainAccountant.setRoom(202);
-	mainAccountant.setIdCard(&mainAccountant202);
-	mainAccountant.setDepartment(&dptAdm);
-	dptAdm.setHead(&mainAccountant);
+	accountant.setPosition("6");
+	accountant.setName("Евгейниев Евгений Евгениевич");
+	accountant.setRoom(535);
+	accountant.setIdCard(&accountant2345);
+	accountant.setDepartment(&depKadr);
+	depKadr.setHead(&accountant);
 
-	headDep.print();
-	mainDev.print();
-	dev.print();
-
+	glavBuh.print();
+	Buh.print();
 	director.print();
-	subDirector.print();
 	mainAccountant.print();
+	accountant.print();
 }
